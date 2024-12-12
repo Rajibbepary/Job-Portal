@@ -1,10 +1,13 @@
 import Lottie from 'lottie-react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import registerAnimationData from '../../assets/Animation - 1733853879954.json'
+import AuthContext from '../../context/AuthContext';
 const Register = () => {
+const { creatUser } = useContext(AuthContext);
+
   const [showPassword, setShowPassword] = useState(false)
   const handleRegister = e =>{
     e.preventDefault();
@@ -27,6 +30,15 @@ const Register = () => {
        toast.error("Password must contain at least one Uppercase letter.");
        return;
      }
+
+     creatUser(email, password)
+     .then(result => {
+     console.log(result.user)
+     })
+     .catch(error =>{
+      console.log(error.message)
+     })
+
      toast.success("Register successfully!");
     console.log(email, password)
 
@@ -42,7 +54,7 @@ const Register = () => {
     </div>
     <div className="card bg-gray-400 w-full max-w-sm shrink-0 shadow-2xl">
     <h1 className="text-4xl font-semibold text-center mt-5">Register</h1>
-      <form onSubmit={handleRegister} className="card-body">
+      <form onSubmit={handleRegister} className="card-body pt-0">
         
       <div className="form-control">
                       <label className="label">

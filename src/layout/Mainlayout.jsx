@@ -1,12 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../pages/shared/Navbar';
+import Footer from '../pages/shared/Footer';
 
 const Mainlayout = () => {
     return (
-        <div className='max-w-6xl mx-auto'>
+        <div>
             <Navbar></Navbar>
             <Outlet></Outlet>
+            <Footer></Footer>
         </div>
     );
 };
